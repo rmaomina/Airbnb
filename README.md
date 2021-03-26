@@ -1,2 +1,2 @@
 # Airbnb
-Nomad AirMnA Clone Coding
+Nomad AirBnB Clone Coding
