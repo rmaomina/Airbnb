@@ -15,7 +15,71 @@ class RoomAdmin(admin.ModelAdmin):
 
     """ Room Admin Definition """
 
-    pass
+    fieldsets = (
+        (
+            "Basic Info",
+            {"fields": ("name", "description", "country", "address", "price")},
+        ),
+        (
+            "Times",
+            {"fields": ("check_in", "check_out", "instant_book")},
+        ),
+        (
+            "Spaces",
+            {"fields": ("guests", "beds", "bedrooms", "baths")},
+        ),
+        (
+            "More About the Space",
+            {
+                "classes": ("collapse",),
+                "fields": ("amenities", "Facilities", "house_rules"),
+            },
+        ),
+        (
+            "Last Detail",
+            {"fields": ("host",)},
+        ),
+    )
+
+    list_display = (
+        "name",
+        "country",
+        "city",
+        "price",
+        "beds",
+        "bedrooms",
+        "baths",
+        "check_in",
+        "check_out",
+        "instant_book",
+        "count_amenities",
+    )
+
+    # ordering = ("name", "price", "bedrooms")
+
+    list_filter = (
+        "instant_book",
+        "host__superhost",
+        "room_type",
+        "amenities",
+        "Facilities",
+        "house_rules",
+        "city",
+        "country",
+    )
+
+    search_fields = ("^city", "^host__username")
+
+    filter_horizontal = (
+        "amenities",
+        "Facilities",
+        "house_rules",
+    )
+
+    def count_amenities(self, obj):
+        return obj.amenities.count()
+
+    count_amenities.short_description = "Potato Title"
 
 
 @admin.register(models.Photo)
