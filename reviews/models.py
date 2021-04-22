@@ -23,7 +23,6 @@ class Review(core_models.TimeStampedModel):
     def __str__(self):
         return f"{self.review}- {self.room}"
 
-    # Method (inside Modes)
     def rating_average(self):
         avg = (
             self.accuracy
