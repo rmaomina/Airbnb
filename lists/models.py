@@ -13,4 +13,7 @@ class List(core_models.TimeStampedModel):
     rooms = models.ManyToManyField("rooms.Room", related_name="lists", blank=True)
 
     def __str__(self):
-        return self.name
+        return f"{self.room} - {self.check_in}"
+
+    def count_rooms(self):
+        return self.rooms.count()
